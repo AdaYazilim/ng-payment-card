@@ -31,89 +31,92 @@ export class PaymentCardComponent implements OnInit {
    */
   public years: Array<number> = [];
 
+  @Input()
+  public installments: string[];
+
   /**
    * Validation message for missing payment card number
    */
   @Input()
-  public ccNumMissingTxt? = 'Card number is required';
+  public ccNumMissingTxt? = 'Kart numarası giriniz';
 
   /**
    * Validation message for too short payment card number
    */
   @Input()
-  public ccNumTooShortTxt? = 'Card number is too short';
+  public ccNumTooShortTxt? = 'Kart numarası fazla kısa';
 
   /**
    * Validation message for too long payment card number
    */
   @Input()
-  public ccNumTooLongTxt? = 'Card number is too long';
+  public ccNumTooLongTxt? = 'Kart numarası fazla uzun';
 
   /**
    * Validation message for payment card number that contains characters other than digits
    */
   @Input()
-  public ccNumContainsLettersTxt? = 'Card number can contain digits only';
+  public ccNumContainsLettersTxt? = 'Kart numarası sadece rakamlardan oluşmalıdır';
 
   /**
    * Validation message for invalid payment card  number (Luhn's validation)
    */
   @Input()
-  public ccNumChecksumInvalidTxt? = 'Provided card number is invalid';
+  public ccNumChecksumInvalidTxt? = 'Geçersiz kart numarası';
 
   /**
    * Validation message for missing card holder name
    */
   @Input()
-  public cardHolderMissingTxt? = 'Card holder name is required';
+  public cardHolderMissingTxt? = 'Kart sahibi ismi giriniz';
 
   /**
    * Validation message for too long card holder name
    */
   @Input()
-  public cardHolderTooLongTxt? = 'Card holder name is too long';
+  public cardHolderTooLongTxt? = 'Kart sahibi ismi fazla uzun';
 
   /**
    * Validation message for missing expiration month
    */
   @Input()
-  public expirationMonthMissingTxt? = 'Expiration month is required';
+  public expirationMonthMissingTxt? = 'Geçerlilik ayı giriniz';
 
   /**
    * Validation message for missing expiration year
    */
   @Input()
-  public expirationYearMissingTxt? = 'Expiration year is required';
+  public expirationYearMissingTxt? = 'Geçerlilik yılı giriniz';
 
   /**
    * Validation message for missing CCV number
    */
   @Input()
-  public ccvMissingTxt? = 'CCV number is required';
+  public ccvMissingTxt? = 'CCV giriniz';
 
   /**
    * Validation message for too short CCV number
    */
   @Input()
-  public ccvNumTooShortTxt? = 'CCV number is too short';
+  public ccvNumTooShortTxt? = 'CCV fazla kısa';
 
   /**
    * Validation message for too long CCV number
    */
   @Input()
-  public ccvNumTooLongTxt? = 'CCV number is too long';
+  public ccvNumTooLongTxt? = 'CCV fazla uzun';
 
   /**
    * Validation message for incorrect CCV number containing characters other than digits
    */
   @Input()
-  public ccvContainsLettersTxt? = 'CCV number can contain digits only';
+  public ccvContainsLettersTxt? = 'CCV sadece rakamlardan oluşmalıdır';
 
   /**
    * Validation message for expired card
    */
   @Input()
-  public cardExpiredTxt? = 'Card has expired';
+  public cardExpiredTxt? = 'Son kullanım tarihi geçmiş';
 
   /**
    * Switch validation of the payment card number
@@ -200,6 +203,7 @@ export class PaymentCardComponent implements OnInit {
             CardValidator.numbersOnly,
           ]),
         ],
+        installment: ['', Validators.required],
       },
       {
         validator: CardValidator.expiration,

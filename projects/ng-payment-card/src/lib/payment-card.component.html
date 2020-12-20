@@ -12,12 +12,12 @@
                  [value]="ccForm.get('cardNumber').value | paymentCardNumber">
         </div>
         <div class="cc-box__element">
-          <label class="cc-form__label" for="cc-holder-display">CARD HOLDER</label>
+          <label class="cc-form__label" for="cc-holder-display">KART SAHİBİ</label>
           <input class="cc-form__input cc-form__input--transparent cc-form__input--embosed" id="cc-holder-display"
                  aria-label="Card holder" disabled="disabled" [value]="ccForm.get('cardHolder').value | uppercase">
         </div>
         <div class="cc-box__element">
-          <label class="cc-form__label" for="cc-valid-date-display">VALID THRU</label>
+          <label class="cc-form__label" for="cc-valid-date-display">GEÇERLİLİK TARİHİ</label>
           <input class="cc-form__input cc-form__input--left-align cc-form__input--transparent cc-form__input--embosed"
                  id="cc-valid-date-display" aria-label="Card holder" disabled="disabled"
                  [value]="ccForm.get('expirationMonth').value + '/' + ccForm.get('expirationYear').value | validThru">
@@ -34,9 +34,12 @@
       </div>
     </div>
   </div>
+
+
   <form class="cc-form" [formGroup]="ccForm" autocomplete="off">
+
     <div class="cc-form__wrapper--long">
-      <label for="cc-number" class="cc-form__label cc-form__label--first">Card number</label>
+      <label for="cc-number" class="cc-form__label cc-form__label--first">Kart Numarası</label>
       <input #ccNumber class="cc-form__input" id="cc-number" aria-label="Card number"
              type="text" title="Card number" maxlength="19" formControlName="cardNumber"
              (focus)="ccBoxFlip.classList.remove('hover')">
@@ -61,8 +64,9 @@
         {{ccNumChecksumInvalidTxt}}
       </div>
     </div>
+
     <div class="cc-form__wrapper--long">
-      <label for="cc-holder-name" class="cc-form__label">Card Holder name</label>
+      <label for="cc-holder-name" class="cc-form__label">Kart Sahibi</label>
       <input class="cc-form__input" id="cc-holder-name" aria-label="Card holder name" type="text"
              title="Card holder name" maxlength="22" formControlName="cardHolder"
              (focus)="ccBoxFlip.classList.remove('hover')">
@@ -77,9 +81,10 @@
         {{cardHolderTooLongTxt}}
       </div>
     </div>
+
     <div class="cc-form--inline">
       <div class="cc-form__wrapper cc-form__wrapper--short">
-        <label for="cc-expiration-month" class="cc-form__label">Expiration month</label>
+        <label for="cc-expiration-month" class="cc-form__label">Geçerlilik Ay</label>
         <select id="cc-expiration-month" class="cc-form__select" aria-label="Expiration month"
                 formControlName="expirationMonth">
           <option *ngFor="let month of months" value="{{month}}"
@@ -87,8 +92,9 @@
           </option>
         </select>
       </div>
+
       <div class="cc-form__wrapper cc-form__wrapper--short">
-        <label for="cc-expiration-year" class="cc-form__label">Expiration year</label>
+        <label for="cc-expiration-year" class="cc-form__label">Geçerlilik Yıl</label>
         <select id="cc-expiration-year" class="cc-form__select" aria-label="Expiration year"
                 formControlName="expirationYear">
           <option *ngFor="let year of years" value="{{year}}"
@@ -96,12 +102,27 @@
           </option>
         </select>
       </div>
+
       <div class="cc-form__wrapper cc-form__wrapper--short cc-form__wrapper--last">
         <label for="cc-ccv" class="cc-form__label">ccv</label>
         <input class="cc-form__input cc-form__input--short" id="cc-ccv" aria-label="CCV" type="text" title="CCV"
                minlength="3" maxlength="4" formControlName="ccv" (focus)="ccBoxFlip.classList.add('hover')">
       </div>
+
     </div>
+
+    <div style="margin-top: -25px; margin-bottom: 25px" class="cc-form__wrapper--long">
+      <label for="cc-installment" class="cc-form__label">Taksit</label>
+      <select id="cc-installment" class="cc-form__select" aria-label="Installment"
+              formControlName="installment">
+        <option *ngFor="let installment of installments" value="{{installment}}"
+                (click)="ccBoxFlip.classList.remove('hover')">{{installment}}
+        </option>
+      </select>
+    </div>
+
+
+
     <div class="cc-form__error"
          *ngIf="validateExpirationMonth && ccForm.get('expirationMonth').touched &&
              ccForm.get('expirationMonth').hasError('required')">
@@ -115,6 +136,11 @@
     <div class="cc-form__error" *ngIf="validateCardExpiration && ccForm.get('expirationMonth').touched &&
     ccForm.get('expirationYear').touched && ccForm.hasError('expiration')">
       {{cardExpiredTxt}}
+    </div>
+    <div class="cc-form__error"
+         *ngIf="validateExpirationMonth && ccForm.get('installment').touched &&
+             ccForm.get('installment').hasError('required')">
+      {{"Taksit seçiniz"}}
     </div>
     <div class="cc-form__error"
          *ngIf="validateCCV && ccForm.get('ccv').touched && ccForm.get('ccv').hasError('required')">
@@ -133,7 +159,7 @@
       {{ccvContainsLettersTxt}}
     </div>
     <button type="submit" class="cc-form__button cc-form__button--ripple" aria-label="submit" (click)="emitSavedCard()"
-            (keydown.enter)="emitSavedCard()">Submit
+            (keydown.enter)="emitSavedCard()" [disabled]="ccForm.invalid">Onayla
     </button>
   </form>
 </section>
