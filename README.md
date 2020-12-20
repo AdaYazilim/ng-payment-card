@@ -61,15 +61,11 @@ Afterwards, you can use the component within your templates.
 <ng-payment-card></ng-payment-card>
 
 // Setting custom validation messages
-<ng-payment-card
-  [ccNumMissingTxt]='Please provide card number'
-  [cardExpiredTxt]='Payment card has expired'>
+<ng-payment-card [ccNumMissingTxt]="Please provide card number" [cardExpiredTxt]="Payment card has expired">
 </ng-payment-card>
 
 // Handling event emitter
-<ng-payment-card
-  (formSaved)="processPayment(cc)">
-</ng-payment-card>
+<ng-payment-card (formSaved)="processPayment(cc)"> </ng-payment-card>
 ```
 
 Upon submitting the form, component will emit object in the following format:
