@@ -2,7 +2,7 @@
 
 @mixin breakpoint($size) {
   @if $size == desktop-only {
-    @media only screen and (min-width: $x-large-min) {
+    @media only screen and (min-width: $large-min) and (max-width: $large-max) {
       @content;
     }
   } @else if $size == laptop-only {
@@ -18,7 +18,7 @@
       @content;
     }
   } @else if $size == tablet {
-    @media only screen and (max-width: $medium-max) {
+    @media only screen and (max-width: $large-max) {
       @content;
     }
   } @else if $size == smartphone-only {
@@ -30,7 +30,7 @@
       @content;
     }
   } @else if $size == mobile {
-    @media only screen and (max-width: $x-small-max) {
+    @media only screen and (max-width: $large-max) {
       @content;
     }
   }

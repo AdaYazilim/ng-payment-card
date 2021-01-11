@@ -11,23 +11,6 @@
 
   &__row {
     margin-top: 10%;
-
-    @media only screen and (max-width: 1919px) {
-      width: 40%;
-    }
-
-    @media only screen and (max-width: 1279px) {
-      width: 50%;
-    }
-
-    @media only screen and (max-width: 959px) {
-      margin-top: 20%;
-      width: 65%;
-    }
-
-    @media only screen and (max-width: 599px) {
-      margin-top: 50%;
-      width: 80%;
-    }
+    width: 20%;
   }
 }
